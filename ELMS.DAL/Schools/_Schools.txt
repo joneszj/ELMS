@@ -1,0 +1,6 @@
+﻿Schools represent school location and types and the relationship with attendees
+Schools represent a Campus, or Online Campus
+Schools have geological restrictions
+Schools/Campus' belong to a Brand (if no brand the school is given brand "None")
+Brands belong to a client
+Brands have a slotting order to manually manipulate order of display to the user

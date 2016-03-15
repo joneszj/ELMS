@@ -1,0 +1,4 @@
+﻿The Data Access Layer (DAL) will manage the database schema, database context, and database IO using Entity Framework.
+The only project that will have access to the DAL is the Business Logic Layer (BLL)
+The DAL should contain all the object and type constraints necessary for the application
+The DAL should not contain business specific logic

@@ -1,0 +1,6 @@
+﻿Sections represent a one way communication to the user to be used on forms via templates
+Sections can also hold pixels and javascript code or other tracking possibilities
+
+Standard Sections are sections that are present or expeted to be present on most or all forms
+
+Sections can contain images, text and videos

@@ -1,0 +1,14 @@
+The vision and purpose of the ELMS is to facilitate an educational profile that users can take advantage of
+to further their education in the direction that is 1) financially best for them and 2) in a direction
+they would enjoy the most
+
+The ELMS will also provide quality leads to universities throughout the world
+
+ELMS.UI.Web is the public and user portal
+	Overview
+	Education Profile
+	Assessment
+	Lead Management
+	Lead Nurturing
+	Online Learning Center
+ELMS.UI.Web.Admin is the enterprise portal

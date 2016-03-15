@@ -1,0 +1,5 @@
+﻿Programs belong to a Brand/Campus
+Programs are displayed on forms
+Programs have min and max Education Level restrictions
+Programs also belong to one or more program major & categories that determine when they appear to the user
+Programs can have tags that allow a more granular identification of the program

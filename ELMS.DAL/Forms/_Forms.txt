@@ -1,0 +1,5 @@
+﻿Forms belong to a Schools.Brand
+Forms are used to extract information from users using html, pixels and other technologies (application tablets and phones)
+Form receive a template, which functions as the html layout for the form
+Templates being primarially html are managed in the UI.Web project
+Forms have standard display areas (tcpa, concierge rep test, etc)
