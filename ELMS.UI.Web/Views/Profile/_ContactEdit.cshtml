@@ -1,6 +1,6 @@
 ﻿@model ELMS.UI.Web.ViewModels.ProfileIndex_Contact
 
-@using (Html.BeginForm())
+@using (Ajax.BeginForm("ContactUpdate", "Profile", null, new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", OnBegin = "OnBegin", OnComplete = "OnComplete", InsertionMode = InsertionMode.Replace, UpdateTargetId = "contactFormId" }, new { @id = "contactFormId" }))
 {
     @Html.AntiForgeryToken()
     

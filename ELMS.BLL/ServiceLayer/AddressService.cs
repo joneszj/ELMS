@@ -12,6 +12,17 @@ namespace ELMS.BLL.ServiceLayer
 {
     public class AddressService : Base
     {
+        public async Task<AddressDTO> EditAddress(Guid userId, AddressDTO dto)
+        {
+            Address p = await context.Addresses.Where(e => e.Active && e.Person.UserId == userId).FirstOrDefaultAsync().ConfigureAwait(false);
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<AddressDTO, Address>()).CreateMapper();
+            p = map.Map<AddressDTO, Address>(dto, p);
+            p.ModifiedBy = userId;
+            int x = await context.SaveChangesAsync().ConfigureAwait(false);
+            var task = await GetAddress(userId);
+            return task;
+        }
+
         public async Task<int> CreateAddress(Guid userId)
         {
             Address p = new Address();

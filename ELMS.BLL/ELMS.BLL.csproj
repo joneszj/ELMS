@@ -58,11 +58,13 @@
     <Compile Include="Base.cs" />
     <Compile Include="DataTransferObjects\AddressDTO.cs" />
     <Compile Include="DataTransferObjects\ContactDTO.cs" />
+    <Compile Include="DataTransferObjects\SelectListItemDTO.cs" />
     <Compile Include="DataTransferObjects\PersonDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLayer\AddressService.cs" />
     <Compile Include="ServiceLayer\ContactService.cs" />
     <Compile Include="ServiceLayer\PersonService.cs" />
+    <Compile Include="ServiceLayer\StandardOptionsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ELMS.DAL\ELMS.DAL.csproj">

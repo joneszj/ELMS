@@ -17,6 +17,7 @@ namespace ELMS.UI.Web.Controllers
         private PersonService personSrv;
         private AddressService addressSrv;
         private ContactService contactSrv;
+        private StandardOptionsService standardOptionsSrv;
         private Guid userId;
 
         public ProfileController()
@@ -24,6 +25,7 @@ namespace ELMS.UI.Web.Controllers
             this.personSrv = new PersonService();
             this.addressSrv = new AddressService();
             this.contactSrv = new ContactService();
+            this.standardOptionsSrv = new StandardOptionsService();
         }
 
         // GET: Profile
@@ -50,9 +52,43 @@ namespace ELMS.UI.Web.Controllers
             return View(dto);
         }
 
+        public ActionResult Person()
+        {
+            this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<PersonDTO, ProfileIndex_Person>()).CreateMapper();
+
+            var db = this.personSrv.GetPerson(userId);
+            db.Wait();
+
+            ProfileIndex_Person dto = map.Map<ProfileIndex_Person>(db.Result);
+            if (dto == null)
+            {
+                personSrv.CreatePerson(userId).Wait();
+                db = personSrv.GetPerson(userId);
+                db.Wait();
+                dto = map.Map<ProfileIndex_Person>(db.Result);
+            }
+            return PartialView("_PersonEdit", dto);
+        }
+
+        [HttpPost]
+        public ActionResult PersonUpdate(ProfileIndex_Person model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<ProfileIndex_Person, PersonDTO>()).CreateMapper();
+            PersonDTO dto = new PersonDTO();
+            dto = map.Map<PersonDTO>(model);
+            dto = personSrv.EditPerson(userId, dto).Result;
+            return RedirectToAction("Person");
+        }
+
         public ActionResult Address()
         {
-            this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId()); 
+            this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
             var map = new MapperConfiguration(cfg => cfg.CreateMap<AddressDTO, ProfileIndex_Address>()).CreateMapper();
 
             var db = this.addressSrv.GetAddress(userId);
@@ -61,20 +97,29 @@ namespace ELMS.UI.Web.Controllers
             ProfileIndex_Address dto = map.Map<ProfileIndex_Address>(db.Result);
             if (dto == null)
             {
-                    addressSrv.CreateAddress(userId).Wait();
-                    db = addressSrv.GetAddress(userId);
-                    db.Wait();
-                    dto = map.Map<ProfileIndex_Address>(db.Result);
+                addressSrv.CreateAddress(userId).Wait();
+                db = addressSrv.GetAddress(userId);
+                db.Wait();
+                dto = map.Map<ProfileIndex_Address>(db.Result);
             }
-            return PartialView("AddressEdit",dto);
+            dto.Countries = standardOptionsSrv.GetCountries().Result;
+            dto.States = standardOptionsSrv.GetStates().Result;
+            return PartialView("_AddressEdit", dto);
         }
 
         [HttpPost]
-        public ActionResult AddressUpdate()
+        public ActionResult AddressUpdate(ProfileIndex_Address model)
         {
-            ProfileIndex_Address dto = new ProfileIndex_Address();
-
-            return PartialView("AddressEdit", dto);
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<ProfileIndex_Address, AddressDTO>()).CreateMapper();
+            AddressDTO dto = new AddressDTO();
+            dto = map.Map<AddressDTO>(model);
+            dto = addressSrv.EditAddress(userId, dto).Result;
+            return RedirectToAction("Address");
         }
 
         public ActionResult Contact()
@@ -93,7 +138,22 @@ namespace ELMS.UI.Web.Controllers
                 db.Wait();
                 dto = map.Map<ProfileIndex_Contact>(db.Result);
             }
-            return PartialView("ContactEdit", dto);
+            return PartialView("_ContactEdit", dto);
+        }
+
+        [HttpPost]
+        public ActionResult ContactUpdate(ProfileIndex_Contact model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<ProfileIndex_Contact, ContactDTO>()).CreateMapper();
+            ContactDTO dto = new ContactDTO();
+            dto = map.Map<ContactDTO>(model);
+            dto = contactSrv.EditContact(userId, dto).Result;
+            return RedirectToAction("Contact");
         }
     }
 }

@@ -12,9 +12,11 @@ namespace ELMS.DAL.StandardOptions
     /// Aka Area of Study
     /// </summary>
     [Table("EducationMajors", Schema="StandardOptions")]
-    public class EducationMajor : Base.Base
+    public class EducationMajor
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int DisplayOrder { get; set; }
+        public bool Active { get; set; }
     }
 }

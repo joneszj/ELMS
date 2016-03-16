@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ELMS.BLL.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ELMS.UI.Web.ViewModels
 {
@@ -15,5 +17,7 @@ namespace ELMS.UI.Web.ViewModels
         public double? Longitude { get; set; }
         public int StateId { get; set; }
         public int CountryId { get; set; }
+        public List<SelectListItemDTO> Countries { get; set; }
+        public List<SelectListItemDTO> States { get; set; }
     }
 }

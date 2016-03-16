@@ -95,6 +95,7 @@
     <Content Include="Programs\_Programs.txt" />
     <Content Include="Schools\_Schools.txt" />
     <Content Include="Common\_Common.txt" />
+    <Content Include="Scripts\statesInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

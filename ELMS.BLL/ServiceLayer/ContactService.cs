@@ -12,6 +12,17 @@ namespace ELMS.BLL.ServiceLayer
 {
     public class ContactService : Base
     {
+        public async Task<ContactDTO> EditContact(Guid userId, ContactDTO dto)
+        {
+            Contact p = await context.Contacts.Where(e => e.Active && e.Person.UserId == userId).FirstOrDefaultAsync().ConfigureAwait(false);
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<ContactDTO, Contact>()).CreateMapper();
+            p = map.Map<ContactDTO, Contact>(dto, p);
+            p.ModifiedBy = userId;
+            int x = await context.SaveChangesAsync().ConfigureAwait(false);
+            var task = await GetContact(userId);
+            return task;
+        }
+
         public async Task<int> CreateContact(Guid userId)
         {
             Contact p = new Contact();

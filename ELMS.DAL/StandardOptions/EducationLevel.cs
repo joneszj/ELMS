@@ -11,9 +11,11 @@ namespace ELMS.DAL.StandardOptions
     /// Aka Level of education
     /// </summary>
     [Table("EducationLevels", Schema="StandardOptions")]
-    public class EducationLevel : Base.Base
+    public class EducationLevel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int DisplayOrder { get; set; }
+        public bool Active { get; set; }
     }
 }
