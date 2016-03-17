@@ -23,6 +23,16 @@ namespace ELMS.BLL.ServiceLayer
             return task;
         }
 
+        public async Task<int> UpdateLatLng(Guid userId, double x, double y, string formattedAddress)
+        {
+            Address p = await context.Addresses.Where(e => e.Active && e.Person.UserId == userId).FirstOrDefaultAsync().ConfigureAwait(false);
+            p.ModifiedBy = userId;
+            p.Latitude = x;
+            p.Longitude = y;
+            p.GoogleMapFormattedAddress = formattedAddress;
+            return await context.SaveChangesAsync().ConfigureAwait(false);
+        }
+
         public async Task<int> CreateAddress(Guid userId)
         {
             Address p = new Address();

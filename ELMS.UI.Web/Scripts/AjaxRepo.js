@@ -4,6 +4,7 @@
 
 function OnFailure(response) {
     $.notify("Update Failure", { className: 'error', globalPosition: "bottom center", showDuration: 300 });
+    //TODO: send email of failure
 }
 
 function OnBegin(response) {

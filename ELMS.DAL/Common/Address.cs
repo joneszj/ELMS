@@ -21,6 +21,7 @@ namespace ELMS.DAL.Standards
         public string Zip { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
+        public string GoogleMapFormattedAddress { get; set; }
 
         [Key, ForeignKey("Person")]
         [Column(Order = 2)]

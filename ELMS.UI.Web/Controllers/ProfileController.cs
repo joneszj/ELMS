@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ELMS.BLL.DataTransferObjects;
 using ELMS.BLL.ServiceLayer;
-using ELMS.UI.Web.ViewModels;
+using ELMS.UI.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -52,8 +52,9 @@ namespace ELMS.UI.Web.Controllers
             return View(dto);
         }
 
-        public ActionResult Person()
+        public PartialViewResult Person()
         {
+            Response.CacheControl = "no-cache";
             this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
             var map = new MapperConfiguration(cfg => cfg.CreateMap<PersonDTO, ProfileIndex_Person>()).CreateMapper();
 
@@ -68,6 +69,7 @@ namespace ELMS.UI.Web.Controllers
                 db.Wait();
                 dto = map.Map<ProfileIndex_Person>(db.Result);
             }
+            dto.partialFormName = "person";
             return PartialView("_PersonEdit", dto);
         }
 
@@ -86,7 +88,7 @@ namespace ELMS.UI.Web.Controllers
             return RedirectToAction("Person");
         }
 
-        public ActionResult Address()
+        public PartialViewResult Address()
         {
             this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
             var map = new MapperConfiguration(cfg => cfg.CreateMap<AddressDTO, ProfileIndex_Address>()).CreateMapper();
@@ -104,6 +106,7 @@ namespace ELMS.UI.Web.Controllers
             }
             dto.Countries = standardOptionsSrv.GetCountries().Result;
             dto.States = standardOptionsSrv.GetStates().Result;
+            dto.partialFormName = "address";
             return PartialView("_AddressEdit", dto);
         }
 
@@ -122,7 +125,17 @@ namespace ELMS.UI.Web.Controllers
             return RedirectToAction("Address");
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public bool UpdateLatLng(double x, double y, string formattedAddress)
+        {
+            bool success = false;
+            this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            int result = addressSrv.UpdateLatLng(userId, x, y, formattedAddress).Result;
+            if (result > 0) { success = true; }
+            return success;
+        }
+
+        public PartialViewResult Contact()
         {
             this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
             var map = new MapperConfiguration(cfg => cfg.CreateMap<ContactDTO, ProfileIndex_Contact>()).CreateMapper();
@@ -138,6 +151,7 @@ namespace ELMS.UI.Web.Controllers
                 db.Wait();
                 dto = map.Map<ProfileIndex_Contact>(db.Result);
             }
+            dto.partialFormName = "contact";
             return PartialView("_ContactEdit", dto);
         }
 

@@ -31,6 +31,7 @@ namespace ELMS.UI.Web
 
             bundles.Add(new ScriptBundle("~/bundles/mainJs").Include(
                     "~/Scripts/AjaxRepo.js",
+                    "~/Scripts/main.js",
                     "~/Scripts/notify.min.js",
                     "~/Scripts/SideBarMenu.js",
                     "~/Scripts/select2.min.js"));

@@ -1,98 +1,120 @@
-﻿@model ELMS.UI.Web.ViewModels.ProfileIndex_Address
+﻿@model ELMS.UI.Web.Models.ProfileIndex_Address
 
-@using (Ajax.BeginForm("AddressUpdate", "Profile", null, new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", OnBegin = "OnBegin", OnComplete = "OnComplete", InsertionMode = InsertionMode.Replace, UpdateTargetId = "addressFormId" }, new { @id = "addressFormId" }))
-{
-    @Html.AntiForgeryToken()
+<div id="@Model.partialFormName-FormIdContainer">
+    @using (Ajax.BeginForm("AddressUpdate", "Profile", null, new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", OnBegin = "OnBegin", OnComplete = "OnComplete", InsertionMode = InsertionMode.Replace, UpdateTargetId = Model.partialFormName + "-FormIdContainer" }, new { @id = Model.partialFormName + "FormId" }))
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>ProfileIndex_Address</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <h4>ProfileIndex_Address</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AptSuiteOther, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AptSuiteOther, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AptSuiteOther, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.AptSuiteOther, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AptSuiteOther, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AptSuiteOther, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.CountryId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.CountryId,
+                Model.Countries.Select(x => new SelectListItem
+                {
+                    Text = x.Text,
+                    Value = x.Id.ToString(),
+                    Selected = Model.CountryId == x.Id
+                }), "Select Country", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.StateId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.StateId,
+                Model.States.Select(x => new SelectListItem
+                {
+                    Text = x.Text,
+                    Value = x.Id.ToString(),
+                    Selected = Model.StateId == x.Id
+                }), "Select State", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CountryId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.CountryId,
-                           Model.Countries.Select(x => new SelectListItem
-                           {
-                               Text = x.Text,
-                               Value = x.Id.ToString(),
-                               Selected = Model.CountryId == x.Id
-                           }), "Select Country", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" disabled />
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StateId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.StateId,
-                           Model.States.Select(x => new SelectListItem
-                           {
-                               Text = x.Text,
-                               Value = x.Id.ToString(),
-                               Selected = Model.StateId == x.Id
-                           }), "Select State", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
         </div>
+    }
+    <script>
+        $(document).ready(function () {
+            //init
+            var form = '@Model.partialFormName';
+            $.validator.unobtrusive.parse("#" + form + "FormId");
+            updateFormValidation(form);
+            //select2 selects
+            $('select').select2();
+            //map init
+            var x = '@Model.Latitude';
+            var y = '@Model.Longitude';
+            initMap('map');
+            setTimeout(function () { checkForUpdate(x, y) }, 3000);
+        })
+        function checkForUpdate(x, y) {
+            if (parseFloat(newLat).toFixed(8) != parseFloat(x).toFixed(8)
+                || parseFloat(newLong).toFixed(8) != parseFloat(y).toFixed(8))
+            {
+                $.post("@Url.Action("UpdateLatLng","Profile")", { x: newLat, y: newLong, formattedAddress: newFormattedAddress }, function (data) { });
+            }
+        }
+    </script>
+    <div style="width:100%; height:400px; max-width: 600px; display: none;">
+        <div style="width:100%; height:400px;" id="map" class="span12"></div>
     </div>
-}
-<script>
-    $(document).ready(function () {
-        $('select').select2();
-    })
-</script>
+</div>
