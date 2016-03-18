@@ -21,14 +21,14 @@ namespace ELMS.DAL.Standards
         {
             this.EducationHistory = new List<EducationHistory>();
         }
-        /// <summary>
-        /// 0.0 - 4.0; 2 digit max precision
-        /// </summary>
-        [RegularExpression(@"^\d+.\d{0,2}$")]
-        [Range(0.0,4.0)]
         public double HighSchoolGPA { get; set; }
         public DateTime HighSchoolGraduationYear { get; set; }
-        //TODO: SAT & ACT Scores
+        public int SATScore { get; set; }
+        /// <summary>
+        /// Not used anymore, but here incase we need it
+        /// </summary>
+        public int SATScoreOld { get; set; }
+        public int ACTScore { get; set; }
 
         [Key, ForeignKey("Person")]
         [Column(Order = 2)]

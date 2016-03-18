@@ -76,6 +76,7 @@
     <Compile Include="StandardOptions\Country.cs" />
     <Compile Include="Common\EducationProfile.cs" />
     <Compile Include="Common\Person.cs" />
+    <Compile Include="StandardOptions\County.cs" />
     <Compile Include="StandardOptions\State.cs" />
     <Compile Include="_Context\ELMSCoreContext.cs" />
     <Compile Include="StandardOptions\EducationLevel.cs" />
@@ -95,6 +96,8 @@
     <Content Include="Programs\_Programs.txt" />
     <Content Include="Schools\_Schools.txt" />
     <Content Include="Common\_Common.txt" />
+    <Content Include="Scripts\countiesInsert.sql" />
+    <Content Include="Scripts\countriesInsert.sql" />
     <Content Include="Scripts\statesInsert.sql" />
   </ItemGroup>
   <ItemGroup>

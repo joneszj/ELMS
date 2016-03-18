@@ -1,5 +1,4 @@
 ﻿@model ELMS.UI.Web.Models.ProfileIndex_Address
-
 <div id="@Model.partialFormName-FormIdContainer">
     @using (Ajax.BeginForm("AddressUpdate", "Profile", null, new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", OnBegin = "OnBegin", OnComplete = "OnComplete", InsertionMode = InsertionMode.Replace, UpdateTargetId = Model.partialFormName + "-FormIdContainer" }, new { @id = Model.partialFormName + "FormId" }))
     {

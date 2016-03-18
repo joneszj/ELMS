@@ -149,6 +149,7 @@ namespace ELMS.DAL._Context
         public DbSet<EducationMajorSubject> EducationMajorSubjects { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
+        public DbSet<County> Counties { get; set; }
 
         //Programs
         public DbSet<Program> Programs { get; set; }

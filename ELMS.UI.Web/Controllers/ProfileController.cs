@@ -30,7 +30,6 @@ namespace ELMS.UI.Web.Controllers
 
         // GET: Profile
         public ActionResult Index()
-
         {
             //check if user has a person object
             this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
@@ -54,7 +53,6 @@ namespace ELMS.UI.Web.Controllers
 
         public PartialViewResult Person()
         {
-            Response.CacheControl = "no-cache";
             this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
             var map = new MapperConfiguration(cfg => cfg.CreateMap<PersonDTO, ProfileIndex_Person>()).CreateMapper();
 

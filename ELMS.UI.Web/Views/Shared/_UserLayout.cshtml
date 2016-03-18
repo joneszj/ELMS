@@ -15,7 +15,9 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7vR2o7exBwzC_WLnJnSj-qvsgBLOxzQg"></script>
 </head>
 <body style="padding-top: 0px">
-
+    @{
+        ViewBag.UpdateTargetId = "page-content-wrapper";
+     }
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -35,13 +37,13 @@
                     <a href="#">Dashboard/Market</a>
                 </li>
                 <li>
-                    <a href="#">My Information</a>
+                    @Ajax.ActionLink("My Information", "Index", "Profile", new AjaxOptions { UpdateTargetId = ViewBag.UpdateTargetId })
                 </li>
                 <li>
-                    <a href="#">My Education Profile</a>
+                    @Ajax.ActionLink("My Education Profile", "Index", "EducationProfile", new AjaxOptions { UpdateTargetId = ViewBag.UpdateTargetId, Url = "EducationProfile" })
                 </li>
                 <li>
-                    <a href="#">Education Assessment Tool (EAT)</a>
+                    @Ajax.ActionLink("Education Assessment Tool (EAT)", "Index", "EducationAssessment", new AjaxOptions { UpdateTargetId = ViewBag.UpdateTargetId })
                 </li>
                 <li>
                     <a href="#">My Leads</a>
@@ -60,8 +62,8 @@
         <!-- /#sidebar-wrapper -->
         <div id="page-content-wrapper">
             @RenderBody()
-            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
         </div>
+        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
     </div>
     @Scripts.Render("~/bundles/bootstrapJs")
     @RenderSection("scripts", required: false)

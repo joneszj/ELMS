@@ -30,5 +30,14 @@ namespace ELMS.BLL.ServiceLayer
             List<SelectListItemDTO> dto = map.Map<List<State>, List<SelectListItemDTO>>(db);
             return dto;
         }
+
+        public async Task<List<SelectListItemDTO>> GetCounties()
+        {
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<County, SelectListItemDTO>()
+                .ForMember(dest => dest.Text, opts => opts.MapFrom(src => src.Name))).CreateMapper();
+            var db = await context.Counties.Where(e => e.Active).ToListAsync().ConfigureAwait(false);
+            List<SelectListItemDTO> dto = map.Map<List<County>, List<SelectListItemDTO>>(db);
+            return dto;
+        }
     }
 }

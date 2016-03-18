@@ -1,9 +1,9 @@
 ﻿@model ELMS.UI.Web.Models.ProfileIndex_Person
-<div id= "@Model.partialFormName-FormIdContainer">
-    @using (Ajax.BeginForm("PersonUpdate", "Profile", null, new AjaxOptions
-    { OnSuccess = "OnSuccess", OnFailure = "OnFailure", OnBegin = "OnBegin", OnComplete = "OnComplete", InsertionMode = InsertionMode.Replace, UpdateTargetId = Model.partialFormName + "-FormIdContainer" }, new { @id = Model.partialFormName + "FormId" }))
+<div id="@Model.partialFormName-FormIdContainer">
+    @using (Ajax.BeginForm("PersonUpdate", "Profile", null, new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", OnBegin = "OnBegin", OnComplete = "OnComplete", InsertionMode = InsertionMode.Replace, UpdateTargetId = Model.partialFormName + "-FormIdContainer" }, new { @id = Model.partialFormName + "FormId" }))
     {
         @Html.AntiForgeryToken()
+
         <div class="form-horizontal">
             <h4>ProfileIndex_Person</h4>
             <hr />

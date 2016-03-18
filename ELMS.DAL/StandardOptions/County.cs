@@ -7,17 +7,13 @@ using System.Threading.Tasks;
 
 namespace ELMS.DAL.StandardOptions
 {
-    [Table("States", Schema= "StandardOptions")]
-    public class State
+    [Table("Counties", Schema= "StandardOptions")]
+    public class County
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Abbreviation { get; set; }
-
-        public int CountryId { get; set; }
-        public virtual Country Country { get; set; }
-
-        public virtual ICollection<County> Counties { get; set; }
+        public int StateId { get; set; }
+        public State State { get; set; }
         public bool Active { get; set; }
     }
 }
