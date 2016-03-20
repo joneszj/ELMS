@@ -2,6 +2,25 @@
     ViewBag.Title = "Profile";
     Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_UserLayout.cshtml";
 }
-
-@Html.Action("EducationProfile")
-@Html.Action("EducationHistory")
+<div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1">Primary</a>
+            </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse in">
+            @Html.Action("EducationProfile")
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse2">Other</a>
+            </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse in">
+            @Html.Action("EducationHistory")
+        </div>
+    </div>
+</div>

@@ -58,6 +58,8 @@
     <Compile Include="Base.cs" />
     <Compile Include="DataTransferObjects\AddressDTO.cs" />
     <Compile Include="DataTransferObjects\ContactDTO.cs" />
+    <Compile Include="DataTransferObjects\EducationHistoryDTO.cs" />
+    <Compile Include="DataTransferObjects\EducationProfileDTO.cs" />
     <Compile Include="DataTransferObjects\SelectListItemDTO.cs" />
     <Compile Include="DataTransferObjects\PersonDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

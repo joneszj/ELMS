@@ -1,1 +1,125 @@
-﻿profile
+﻿@model ELMS.UI.Web.Models.EducationProfileIndex_EducationProfile
+<div id="@Model.partialFormName-FormIdContainer">
+    @using (Ajax.BeginForm("EducationProfileUpdate", "EducationProfile", null, new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", OnBegin = "OnBegin", OnComplete = "OnComplete", InsertionMode = InsertionMode.Replace, UpdateTargetId = Model.partialFormName + "-FormIdContainer" }, new { @id = Model.partialFormName + "FormId" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @*<h4>EducationProfileIndex_EducationProfile</h4>*@
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.HighSchoolGPA, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HighSchoolGPA, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HighSchoolGPA, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HighSchoolGraduationYear, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HighSchoolGraduationYear, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HighSchoolGraduationYear, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GED, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.GED, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GED, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.HighSchoolName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HighSchoolName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HighSchoolName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CountyId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.CountyId,
+                Model.Counties.Select(x => new SelectListItem
+                {
+                    Text = x.Text,
+                    Value = x.Id.ToString(),
+                    Selected = Model.CountyId == x.Id
+                }), "Select County", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CountyId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.SATScore, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SATScore, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SATScore, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ACTScore, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ACTScore, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ACTScore, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.MilitaryExperience, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.MilitaryExperience, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MilitaryExperience, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" disabled/>
+                </div>
+            </div>
+        </div>
+    }
+    <script>
+    var CountyIdElement = $('#CountyId');
+    $(document).ready(function () {
+        var form = '@Model.partialFormName';
+        var state = false;
+        $.validator.unobtrusive.parse("#" + form + "FormId");
+        updateFormValidation(form);
+
+        CountyIdElement.select2({
+            ajax: {
+                url: "/EducationProfile/GetFilteredCounties",
+                dataType: 'json',
+                quietMillis: 150,
+                data: function (params) {
+                    return {
+                        filter: params.term,
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                id: item.Id ,
+                                text: item.Text,
+                            }
+                        })
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 3
+        });
+    });
+    </script>
+</div>

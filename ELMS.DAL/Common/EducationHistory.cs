@@ -12,14 +12,13 @@ namespace ELMS.DAL.Common
 {
     /// <summary>
     /// Represents the educational history for a person via their education profile
+    /// This information is not tied to Schools.School
     /// </summary>
     [Table("EducationHistories", Schema= "Common")]
     public class EducationHistory : Base.Base
     {
-        public int EducationProfileId { get; set; }
         public virtual EducationProfile EducationProfile { get; set; }
-        public int SchoolId { get; set; }
-        public virtual School SchoolAttended { get; set; }
+        public string InstitutionName { get; set; }
         public int EducationMajorId { get; set; }
         public virtual EducationMajor EducationMajor { get; set; }
         public DateTime? DateDegreeAttained { get; set; }

@@ -6,7 +6,7 @@ function updateFormValidation(form) {
     $('#' + form + 'FormId input,select').keyup(function () {
         updateUI(form);
     });
-    $('#' + form + 'FormId input,select').change(function () {
+    $('#' + form + 'FormId select').change(function () {
         updateUI(form);
     });
 }

@@ -1,4 +1,5 @@
-﻿using ELMS.DAL.StandardOptions;
+﻿using ELMS.DAL.Schools;
+using ELMS.DAL.StandardOptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,14 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ELMS.DAL.Standards
+namespace ELMS.DAL.Schools
 {
     /// <summary>
     /// Represents a physical address
-    /// Common.Addess are submitted by the user and thus are not varified in any
     /// </summary>
-    [Table("Addresses", Schema= "Common")]
-    public class Address : Base.Base
+    [Table("SchoolAddresses", Schema= "School")]
+    public class SchoolAddress : Base.Base
     {
         public string Street { get; set; }
         public string AptSuiteOther { get; set; }
@@ -24,10 +24,10 @@ namespace ELMS.DAL.Standards
         public double? Longitude { get; set; }
         public string GoogleMapFormattedAddress { get; set; }
 
-        [Key, ForeignKey("Person")]
+        [Key, ForeignKey("School")]
         [Column(Order = 2)]
-        public int PersonId { get; set; }
-        public virtual Person Person { get; set; }
+        public int SchoolId { get; set; }
+        public virtual School School { get; set; }
         public int? StateId { get; set; }
         public virtual State State { get; set; }
         public int? CountryId { get; set; }

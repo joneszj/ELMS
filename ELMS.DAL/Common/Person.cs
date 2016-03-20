@@ -15,18 +15,12 @@ namespace ELMS.DAL.Standards
     public class Person : Base.Base
     {
         public Guid UserId { get; set; }
-        [MinLength(1)]
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
-        [MinLength(1)]
         public string LastName { get; set; }
-        /// <summary>
-        /// min 0, leave the BLL to determine max age
-        /// </summary>
-        [Range(0,int.MaxValue)]
-        public int? Age { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
-        public virtual ICollection<Address> Addess { get; set; }
+        public virtual ICollection<Address> Address { get; set; }
         public virtual ICollection<Contact> Contact { get; set; }
         public virtual ICollection<EducationProfile> EducationProfile { get; set; }
     }

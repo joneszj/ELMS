@@ -17,23 +17,24 @@ namespace ELMS.DAL.Standards
     [Table("EducationProfiles", Schema= "Common")]
     public class EducationProfile : Base.Base
     {
-        public EducationProfile()
-        {
-            this.EducationHistory = new List<EducationHistory>();
-        }
-        public double HighSchoolGPA { get; set; }
-        public DateTime HighSchoolGraduationYear { get; set; }
-        public int SATScore { get; set; }
+        public string HighSchoolName { get; set; }
+        public int? CountyId { get; set; }
+        public double? HighSchoolGPA { get; set; }
+        public DateTime? HighSchoolGraduationYear { get; set; }
+        public bool GED { get; set; }
+        public int? SATScore { get; set; }
+        public int? ACTScore { get; set; }
         /// <summary>
         /// Not used anymore, but here incase we need it
         /// </summary>
         public int SATScoreOld { get; set; }
-        public int ACTScore { get; set; }
+        public bool MilitaryExperience { get; set; }
 
         [Key, ForeignKey("Person")]
         [Column(Order = 2)]
         public int PersonId { get; set; }
         public virtual Person Person { get; set; }
         public virtual ICollection<EducationHistory> EducationHistory { get; set; }
+        public virtual County County { get; set; }
     }
 }

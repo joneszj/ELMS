@@ -21,5 +21,7 @@ namespace ELMS.DAL.Schools
         public virtual SchoolType SchoolType { get; set; }
         public int BrandId { get; set; }
         public virtual Brand Brand { get; set; }
+
+        public ICollection<SchoolAddress> SchoolAddress { get; set; }
     }
 }

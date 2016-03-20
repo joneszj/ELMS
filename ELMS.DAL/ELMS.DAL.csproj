@@ -69,6 +69,7 @@
     <Compile Include="Schools\Brand.cs" />
     <Compile Include="Schools\Client.cs" />
     <Compile Include="Schools\School.cs" />
+    <Compile Include="Schools\SchoolAddress.cs" />
     <Compile Include="Schools\SchoolProfile.cs" />
     <Compile Include="Schools\SchoolType.cs" />
     <Compile Include="Common\Address.cs" />

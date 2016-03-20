@@ -15,8 +15,8 @@ namespace ELMS.BLL.DataTransferObjects
         public string Zip { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
-        public int StateId { get; set; }
-        public int CountryId { get; set; }
+        public int? StateId { get; set; }
+        public int? CountryId { get; set; }
         public string GoogleMapFormattedAddress { get; set; }
     }
 }

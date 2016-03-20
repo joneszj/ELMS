@@ -20,8 +20,8 @@ namespace ELMS.UI.Web.Models
         [HiddenInput(DisplayValue = false)]
         public double? Longitude { get; set; }
         public string GoogleMapFormattedAddress { get; set; }
-        public int StateId { get; set; }
-        public int CountryId { get; set; }
+        public int? StateId { get; set; }
+        public int? CountryId { get; set; }
         public List<SelectListItemDTO> Countries { get; set; }
         public List<SelectListItemDTO> States { get; set; }
     }

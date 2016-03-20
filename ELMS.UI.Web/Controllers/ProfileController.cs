@@ -103,7 +103,7 @@ namespace ELMS.UI.Web.Controllers
                 dto = map.Map<ProfileIndex_Address>(db.Result);
             }
             dto.Countries = standardOptionsSrv.GetCountries().Result;
-            dto.States = standardOptionsSrv.GetStates().Result;
+            dto.States = standardOptionsSrv.GetStates(dto.CountryId).Result;
             dto.partialFormName = "address";
             return PartialView("_AddressEdit", dto);
         }

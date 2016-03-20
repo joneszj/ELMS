@@ -1,16 +1,15 @@
-﻿using ELMS.BLL.DataTransferObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ELMS.UI.Web.Models
+namespace ELMS.BLL.DataTransferObjects
 {
-    public class EducationProfileIndex_EducationHistory
+    public class EducationHistoryDTO
     {
         public string InstitutionName { get; set; }
         public int EducationMajorId { get; set; }
-        public List<SelectListItemDTO> EducationMajors { get; set; }
         public DateTime? DateDegreeAttained { get; set; }
     }
 }

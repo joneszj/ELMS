@@ -14,7 +14,8 @@ namespace ELMS.UI.Web.Models
         public string MiddleName { get; set; }
         [RegularExpression("^[A-Z]'?[- a-zA-Z]+$", ErrorMessage = "Only letters, apostophies, spaces, and hyphens permitted")]
         public string LastName { get; set; }
-        [Range(0, 120, ErrorMessage = "Must be between 0 and 120")]
-        public int? Age { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime? DateOfBirth { get; set; }
     }
 }

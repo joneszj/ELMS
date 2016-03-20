@@ -14,10 +14,10 @@ namespace ELMS.BLL.ServiceLayer
     {
         public async Task<AddressDTO> EditAddress(Guid userId, AddressDTO dto)
         {
-            Address p = await context.Addresses.Where(e => e.Active && e.Person.UserId == userId).FirstOrDefaultAsync().ConfigureAwait(false);
+            Address a = await context.Addresses.Where(e => e.Active && e.Person.UserId == userId).FirstOrDefaultAsync().ConfigureAwait(false);
             var map = new MapperConfiguration(cfg => cfg.CreateMap<AddressDTO, Address>()).CreateMapper();
-            p = map.Map<AddressDTO, Address>(dto, p);
-            p.ModifiedBy = userId;
+            a = map.Map<AddressDTO, Address>(dto, a);
+            a.ModifiedBy = userId;
             int x = await context.SaveChangesAsync().ConfigureAwait(false);
             var task = await GetAddress(userId);
             return task;
@@ -25,21 +25,21 @@ namespace ELMS.BLL.ServiceLayer
 
         public async Task<int> UpdateLatLng(Guid userId, double x, double y, string formattedAddress)
         {
-            Address p = await context.Addresses.Where(e => e.Active && e.Person.UserId == userId).FirstOrDefaultAsync().ConfigureAwait(false);
-            p.ModifiedBy = userId;
-            p.Latitude = x;
-            p.Longitude = y;
-            p.GoogleMapFormattedAddress = formattedAddress;
+            Address a = await context.Addresses.Where(e => e.Active && e.Person.UserId == userId).FirstOrDefaultAsync().ConfigureAwait(false);
+            a.ModifiedBy = userId;
+            a.Latitude = x;
+            a.Longitude = y;
+            a.GoogleMapFormattedAddress = formattedAddress;
             return await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
         public async Task<int> CreateAddress(Guid userId)
         {
-            Address p = new Address();
+            Address a = new Address();
             var person = await context.People.Where(e => e.Active && e.UserId == userId).FirstOrDefaultAsync().ConfigureAwait(false);
-            p.PersonId = person.Id;
-            p.CreatedBy = userId;
-            person.Addess.Add(p);
+            a.PersonId = person.Id;
+            a.CreatedBy = userId;
+            person.Address.Add(a);
             var task = await context.SaveChangesAsync().ConfigureAwait(false);
             return task;
         }
@@ -49,6 +49,7 @@ namespace ELMS.BLL.ServiceLayer
             var map = new MapperConfiguration(cfg => cfg.CreateMap<Address, AddressDTO>()).CreateMapper();
             var db = await context.Addresses.Where(e => e.Active && e.Person.UserId == userId).FirstOrDefaultAsync().ConfigureAwait(false);
             AddressDTO dto = map.Map<AddressDTO>(db);
+            dto.CountryId = dto.CountryId == null ? 236 : dto.CountryId;
             return dto;
         }
     }
