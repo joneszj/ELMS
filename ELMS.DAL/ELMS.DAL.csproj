@@ -99,6 +99,7 @@
     <Content Include="Common\_Common.txt" />
     <Content Include="Scripts\countiesInsert.sql" />
     <Content Include="Scripts\countriesInsert.sql" />
+    <Content Include="Scripts\educationLevelInsert.sql" />
     <Content Include="Scripts\statesInsert.sql" />
   </ItemGroup>
   <ItemGroup>

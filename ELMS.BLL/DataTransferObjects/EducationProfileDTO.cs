@@ -8,9 +8,10 @@ namespace ELMS.BLL.DataTransferObjects
 {
     public class EducationProfileDTO
     {
+        public int CurrentEducation { get; set; }
         public string HighSchoolName { get; set; }
         public double? HighSchoolGPA { get; set; }
-        public DateTime? HighSchoolGraduationYear { get; set; }
+        public int? HighSchoolGraduationYear { get; set; }
         public bool GED { get; set; }
         public int? CountyId { get; set; }
         public int? SATScore { get; set; }

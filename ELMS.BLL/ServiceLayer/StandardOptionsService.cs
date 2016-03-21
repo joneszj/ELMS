@@ -31,6 +31,18 @@ namespace ELMS.BLL.ServiceLayer
             return dto;
         }
 
+        public async Task<List<SelectListItemDTO>> GetEducationLevels(int? CountryID = 236)
+        {
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<EducationLevel, SelectListItemDTO>()
+                .ForMember(dest => dest.Text, opts => opts.MapFrom(src => src.Name))).CreateMapper();
+            var db = await context.EducationLevels
+                .Where(e => e.Active)
+                .OrderBy(e => e.DisplayOrder)
+                .ToListAsync().ConfigureAwait(false);
+            List<SelectListItemDTO> dto = map.Map<List<EducationLevel>, List<SelectListItemDTO>>(db);
+            return dto;
+        }
+
         public async Task<List<SelectListItemDTO>> GetCounties(int? StateID = 0, string filter = "")
         {
             var map = new MapperConfiguration(cfg => cfg.CreateMap<County, SelectListItemDTO>()
@@ -48,6 +60,27 @@ namespace ELMS.BLL.ServiceLayer
                 .Take(20)
                 .Select(e => new SelectListItemDTO { Id = e.Id, Text = e.Name + " - " + e.State.Name })
                 .ToListAsync().ConfigureAwait(false);
+            return dto;
+        }
+
+        public async Task<SelectListItemDTO> GetCountyBiId(int CountyID = 0)
+        {
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<County, SelectListItemDTO>()
+                .ForMember(dest => dest.Text, opts => opts.MapFrom(src => src.Name))).CreateMapper();
+            var db = await context.Counties.Where(e => e.Active)
+                .Where(e => e.Id == CountyID)
+                .Select(e => new SelectListItemDTO { Id = e.Id, Text = e.Name + " - " + e.State.Name })
+                .FirstOrDefaultAsync().ConfigureAwait(false); ;
+            return db;
+        }
+
+        public List<SelectListItemDTO> GetGraduationYears()
+        {
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<int, SelectListItemDTO>()
+                .ForMember(dest => dest.Text, opts => opts.MapFrom(src => src))
+                .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src))).CreateMapper();
+            var graduationYears = Enumerable.Range(DateTime.Now.Year - 100, 101).OrderByDescending(e => e).ToList();
+            List<SelectListItemDTO> dto = map.Map<List<int>, List<SelectListItemDTO>>(graduationYears);
             return dto;
         }
     }

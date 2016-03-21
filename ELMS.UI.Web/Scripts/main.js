@@ -2,6 +2,10 @@
 var newLong;
 var newFormattedAddress;
 
+function select2WidthHelper(select2Element) {
+    select2Element.next().css("maxWidth", "280px").css("width","100%");
+}
+
 function updateFormValidation(form) {
     $('#' + form + 'FormId input,select').keyup(function () {
         updateUI(form);

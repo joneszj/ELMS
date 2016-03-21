@@ -7,7 +7,7 @@ function OnFailure(response) {
     //TODO: send email of failure
 }
 
-function OnBegin(response) {
+function OnBegin() {
 }
 
 function OnComplete(response) {

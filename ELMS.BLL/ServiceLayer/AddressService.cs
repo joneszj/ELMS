@@ -49,7 +49,10 @@ namespace ELMS.BLL.ServiceLayer
             var map = new MapperConfiguration(cfg => cfg.CreateMap<Address, AddressDTO>()).CreateMapper();
             var db = await context.Addresses.Where(e => e.Active && e.Person.UserId == userId).FirstOrDefaultAsync().ConfigureAwait(false);
             AddressDTO dto = map.Map<AddressDTO>(db);
-            dto.CountryId = dto.CountryId == null ? 236 : dto.CountryId;
+            if (dto != null)
+            {
+                dto.CountryId = dto.CountryId == null ? 236 : dto.CountryId;
+            }
             return dto;
         }
     }

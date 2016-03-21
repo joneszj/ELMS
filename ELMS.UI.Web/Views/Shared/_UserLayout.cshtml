@@ -70,5 +70,10 @@
     </div>
     @Scripts.Render("~/bundles/bootstrapJs")
     @RenderSection("scripts", required: false)
+    <script>
+        $('.sidebar-nav a').click(function () {
+            $.notify("Transitioning", { className: 'info', globalPosition: "bottom center", showDuration: 100 });
+        })
+    </script>
 </body>
 </html>

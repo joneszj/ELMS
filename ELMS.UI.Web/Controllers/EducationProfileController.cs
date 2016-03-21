@@ -49,9 +49,34 @@ namespace ELMS.UI.Web.Controllers
                 db.Wait();
                 dto = map.Map<EducationProfileIndex_EducationProfile>(db.Result);
             }
-            dto.Counties = standardOptionsSrv.GetCounties(null).Result;
+            if (dto.CountyId.HasValue)
+            {
+                dto.Counties = new List<SelectListItemDTO>();
+                dto.Counties.Add(standardOptionsSrv.GetCountyBiId(dto.CountyId.Value).Result);
+            }
+            else
+            {
+                dto.Counties = standardOptionsSrv.GetCounties(null).Result;
+            }
+            dto.EducationLevels = standardOptionsSrv.GetEducationLevels().Result;
+            dto.GraduationYears = standardOptionsSrv.GetGraduationYears();
             dto.partialFormName = "educationProfile";
             return PartialView("_EducationProfile", dto);
+        }
+
+        [HttpPost]
+        public ActionResult EducationProfileUpdate(EducationProfileIndex_EducationProfile model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            this.userId = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            var map = new MapperConfiguration(cfg => cfg.CreateMap<EducationProfileIndex_EducationProfile, EducationProfileDTO>()).CreateMapper();
+            EducationProfileDTO dto = new EducationProfileDTO();
+            dto = map.Map<EducationProfileDTO>(model);
+            dto = educationProfileService.EditEducationProfile(userId, dto).Result;
+            return RedirectToAction("EducationProfile");
         }
 
         [HttpGet]

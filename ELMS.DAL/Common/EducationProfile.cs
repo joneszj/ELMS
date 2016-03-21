@@ -17,10 +17,11 @@ namespace ELMS.DAL.Standards
     [Table("EducationProfiles", Schema= "Common")]
     public class EducationProfile : Base.Base
     {
+        public int CurrentEducation { get; set; }
         public string HighSchoolName { get; set; }
         public int? CountyId { get; set; }
         public double? HighSchoolGPA { get; set; }
-        public DateTime? HighSchoolGraduationYear { get; set; }
+        public int? HighSchoolGraduationYear { get; set; }
         public bool GED { get; set; }
         public int? SATScore { get; set; }
         public int? ACTScore { get; set; }
